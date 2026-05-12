@@ -14,6 +14,20 @@ const styles = StyleSheet.create({
     h2: {
         color: '#f2f2f2',
         fontSize: 30
+    },
+    containerCoins: {
+        padding: 30,
+        marginTop: 20,
+        borderRadius: 10,
+        backgroundColor: '#333'
+    },
+    coinA: {
+        color: '#999',
+        fontSize: 20
+    },
+    coinB: {
+        color: '#f2f2f2',
+        fontSize: 60
     }
 })
 

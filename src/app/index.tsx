@@ -1,12 +1,40 @@
 import ScrollArea from "@/components/ScrollArea"
-import { Text } from "react-native"
+import { useEffect, useState } from "react"
+import { Text, View } from "react-native"
 import styles from "./styles"
 
+const COIN = "https://v6.exchangerate-api.com/v6/fe25cc0e3ca35d8731d1e14f/latest/"
+
 export default function Index() {
+
+    const [coinA, setCoinA] = useState('USD')
+    const [coinB, setCoinB] = useState('BRL')
+    const [result, setResult] = useState('')
+
+    useEffect(() => { compare() }, [])
+
+    async function compare() {
+        try {
+            const data = await fetch(`https://v6.exchangerate-api.com/v6/fe25cc0e3ca35d8731d1e14f/latest/${coinA}`)
+            const response = await data.json()
+
+            setResult(response.conversion_rates[coinB].toFixed(2))
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <ScrollArea style={styles.container}>
             <Text style={styles.h2}>Olá mundo!</Text>
-            <Text style={styles.h1}>Câmbio APP</Text>
-        </ScrollArea>
+            <Text onPress={compare} style={styles.h1}>Câmbio APP</Text>
+            <View style={styles.containerCoins}>
+                <Text style={styles.coinA}>
+                    1 {coinA} equivale:
+                </Text>
+                <Text style={styles.coinB} >
+                    {result} {coinB}.
+                </Text>
+            </View>
+        </ScrollArea >
     )
 }
