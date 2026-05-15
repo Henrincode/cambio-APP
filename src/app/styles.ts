@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     },
     containerCoins: {
         padding: 30,
-        marginTop: 20,
+        marginTop: 10,
         borderRadius: 10,
         backgroundColor: '#333'
     },
@@ -28,6 +28,14 @@ const styles = StyleSheet.create({
     coinB: {
         color: '#f2f2f2',
         fontSize: 60
+    },
+    btnA: {
+        padding: 4,
+        paddingHorizontal: 8,
+        borderRadius: 10,
+        backgroundColor: "#3B7597",
+    }, btnAText: {
+        color: 'white'
     }
 })
 
