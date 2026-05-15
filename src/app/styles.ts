@@ -3,39 +3,59 @@ import { StyleSheet } from "react-native"
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#4c4c4c'
+        gap: 30,
+        backgroundColor: '#0d1b2a'
     },
-    h1: {
+    tittleView: {
+        alignSelf: 'stretch',
+    },
+    tittleText: {
+        alignSelf: 'flex-start',
         color: '#f2f2f2',
-        fontSize: 40
+        fontSize: 36,
+        fontWeight: 'bold'
     },
-    h2: {
+    tittleSub: {
+        alignSelf: 'flex-start',
+        color: '#415a77',
+        fontSize: 18,
+    },
+
+    calcView: {
+        alignSelf: 'stretch',
+        gap: 10,
+        height: 300,
+        padding: 20,
+        borderRadius: 20,
+        backgroundColor: '#1b263b'
+    },
+    calcText: {
+        color: '#415a77',
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    calcButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: 15,
+    },
+    calcButton: {
+        paddingVertical: 4,
+        paddingHorizontal: 8,
+        borderRadius: 8,
+        backgroundColor: '#30455c',
+    },
+    calcButtonText: {
         color: '#f2f2f2',
-        fontSize: 30
-    },
-    containerCoins: {
-        padding: 30,
-        marginTop: 10,
-        borderRadius: 10,
-        backgroundColor: '#333'
-    },
-    coinA: {
-        color: '#999',
+        fontWeight: 'bold',
         fontSize: 20
     },
-    coinB: {
-        color: '#f2f2f2',
-        fontSize: 60
-    },
-    btnA: {
-        padding: 4,
-        paddingHorizontal: 8,
-        borderRadius: 10,
-        backgroundColor: "#3B7597",
-    }, btnAText: {
-        color: 'white'
+    calcInput: {
+        backgroundColor: '#415a77'
     }
 })
 

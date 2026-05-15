@@ -22,7 +22,7 @@ export default function ScrollArea({ children, style }: Props) {
             >
 
                 <ScrollView
-                    contentContainerStyle={[{ paddingTop: insets.top + 20, paddingBottom: insets.bottom + 10 }, style, { flex: 0, flexGrow: 1 }]}
+                    contentContainerStyle={[{paddingHorizontal: 10, paddingTop: insets.top + 20, paddingBottom: insets.bottom + 10 }, style, { flex: 0, flexGrow: 1 }]}
                     showsVerticalScrollIndicator={false}
                 >
                     {children}

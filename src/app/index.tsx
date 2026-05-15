@@ -1,10 +1,8 @@
 import ScrollArea from "@/components/ScrollArea"
 import { COINS_LIST, COINS_URL } from "@/constants"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Text, TouchableOpacity, View } from "react-native"
 import styles from "./styles"
-
-const COIN = "https://v6.exchangerate-api.com/v6/fe25cc0e3ca35d8731d1e14f/latest/"
 
 export default function Index() {
 
@@ -12,7 +10,7 @@ export default function Index() {
     const [coinB, setCoinB] = useState('BRL')
     const [result, setResult] = useState('')
 
-    useEffect(() => { compare() }, [])
+    // useEffect(() => { compare() }, [])
 
     async function compare() {
         try {
@@ -26,24 +24,39 @@ export default function Index() {
     }
     return (
         <ScrollArea style={styles.container}>
-            <Text style={styles.h2}>Olá mundo!</Text>
-            <Text onPress={compare} style={styles.h1}>Câmbio APP</Text>
-            {/* botões */}
-            <View style={{ flexDirection: 'row', backgroundColor: 'red', width: '100%' }}>
-                {COINS_LIST.map(coin => (
-                    <TouchableOpacity style={styles.btnA}>
-                        <Text style={styles.btnAText}>{coin.sigla}</Text>
-                    </TouchableOpacity>
-                ))}
+
+            {/* tittle */}
+            <View style={styles.tittleView}>
+                <Text style={styles.tittleText}>
+                    Conversor de Moedas
+                </Text>
+                <Text style={styles.tittleSub}>
+                    Converta valores de diferentes moedas
+                </Text>
             </View>
 
-            <View style={styles.containerCoins}>
-                <Text style={styles.coinA}>
-                    1 {coinA} equivale:
+            {/* calc */}
+            <View style={styles.calcView}>
+                <Text style={styles.calcText}>
+                    de qual moeda
                 </Text>
-                <Text style={styles.coinB} >
-                    {result} {coinB}.
-                </Text>
+
+                {/* buttons list */}
+                <View style={styles.calcButtons}>
+                    {COINS_LIST.map(coin => (
+
+                        // buttons
+                        <TouchableOpacity
+                            key={coin.sigla} onPress={() => setCoinA(coin.sigla)}
+                            style={[styles.calcButton, coinA === coin.sigla && { backgroundColor: '#00a8e8' }]}
+                        >
+                            <Text style={styles.calcButtonText}>
+                                {coin.sigla}
+                            </Text>
+                        </TouchableOpacity>
+                    ))}
+                </View>
+
             </View>
         </ScrollArea >
     )
