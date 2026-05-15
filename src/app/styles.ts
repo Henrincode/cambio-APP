@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        // justifyContent: 'center',
+        // flex: 1,
+        justifyContent: 'flex-start',
         alignItems: 'center',
         gap: 30,
         backgroundColor: '#0d1b2a'
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     calcView: {
         alignSelf: 'stretch',
         gap: 10,
-        height: 300,
         padding: 20,
         borderRadius: 20,
         backgroundColor: '#1b263b'
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
         color: '#415a77',
         fontSize: 18,
         fontWeight: 'bold',
-        textAlign: 'center'
+        // textAlign: 'center'
     },
     calcButtons: {
         flexDirection: 'row',
@@ -55,7 +54,12 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     calcInput: {
-        backgroundColor: '#415a77'
+        backgroundColor: '#415a77',
+        borderRadius: 8,
+        color: "#f2f2f2",
+        fontSize: 18,
+        paddingHorizontal: 10,
+        textAlign: "right"
     }
 })
 
