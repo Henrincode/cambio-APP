@@ -1,18 +1,13 @@
-export const COINS_URL = "https://v6.exchangerate-api.com/v6/fe25cc0e3ca35d8731d1e14f/latest/"
+export const COINS_URL: string = "https://v6.exchangerate-api.com/v6/fe25cc0e3ca35d8731d1e14f/latest/"
 
-export const COINS_LIST = [
-  // Criptomoedas primeiro
-  {
-    nome: "Bitcoin",
-    sigla: "BTC",
-    simbolo: "₿"
-  },
-  {
-    nome: "Ethereum",
-    sigla: "ETH",
-    simbolo: "Ξ"
-  },
-  // Real e USA em seguida
+export interface Coin {
+  nome: string
+  sigla: string
+  simbolo: string
+}
+
+export const COINS_LIST: Coin[] = [
+  // Principais locais e de referência comercial
   {
     nome: "Real Brasileiro",
     sigla: "BRL",
@@ -23,7 +18,7 @@ export const COINS_LIST = [
     sigla: "USD",
     simbolo: "$"
   },
-  // O resto na melhor ordem (principais moedas globais)
+  // Principais moedas globais (G10 e potências econômicas)
   {
     nome: "Euro",
     sigla: "EUR",
@@ -40,18 +35,28 @@ export const COINS_LIST = [
     simbolo: "¥"
   },
   {
-    nome: "Franco Suíço",
-    sigla: "CHF",
-    simbolo: "CHF"
-  },
-  {
     nome: "Iuan Chinês",
     sigla: "CNY",
     simbolo: "¥"
+  },
+  {
+    nome: "Franco Suíço",
+    sigla: "CHF",
+    simbolo: "CHF"
   },
   {
     nome: "Dólar Canadense",
     sigla: "CAD",
     simbolo: "$"
   },
+  {
+    nome: "Dólar Australiano",
+    sigla: "AUD",
+    simbolo: "$"
+  },
+  {
+    nome: "Dólar Neozelandês",
+    sigla: "NZD",
+    simbolo: "$"
+  }
 ];

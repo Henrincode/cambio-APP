@@ -1,33 +1,44 @@
 import ScrollArea from "@/components/ScrollArea"
-import { COINS_LIST, COINS_URL } from "@/constants"
-import { useState } from "react"
+import { Coin, COINS_LIST, COINS_URL } from "@/constants"
+import { useEffect, useState } from "react"
 import { Text, TextInput, TouchableOpacity, View } from "react-native"
 import styles from "./styles"
 
-
-interface Coin {
-    nome: string
-    sigla: string
-    simbolo: string
-}
-
 export default function Index() {
 
-    const defaultCoinA = COINS_LIST.find(c => c.sigla === 'USD') as Coin
+    const defaultCoinA = COINS_LIST.find(c => c?.sigla === 'USD') as Coin
     const defaultCoinB = COINS_LIST.find(c => c.sigla === 'BRL') as Coin
 
-    const [coinA, setCoinA] = useState<Coin>(defaultCoinA)
-    const [coinB, setCoinB] = useState<Coin>(defaultCoinB)
-    const [result, setResult] = useState('')
+    const [coinA, setCoinA] = useState(defaultCoinA)
+    const [coinB, setCoinB] = useState(defaultCoinB)
+    const [valueCalc, setValueCalc] = useState('1')
+    const [result, setResult] = useState({
+        siglaA: '---',
+        siglaB: '---',
+        valueCalc: '---',
+        calc: '---',
+    })
 
-    // useEffect(() => { compare() }, [])
+    useEffect(() => { compare() }, [])
+
+    function checkNumber(param: string) {
+        if (isNaN(Number(param))) return
+        setValueCalc(param)
+    }
 
     async function compare() {
         try {
             const data = await fetch(COINS_URL + coinA.sigla)
             const response = await data.json()
 
-            setResult(response.conversion_rates[coinB.sigla].toFixed(2))
+            const newResult = {
+                siglaA: coinA.sigla,
+                siglaB: coinB.sigla,
+                valueCalc: (+valueCalc || 0).toFixed(2),
+                calc: (response.conversion_rates[coinB.sigla] * (+valueCalc || 0)).toFixed(2)
+            }
+
+            setResult(newResult)
         } catch (error) {
             console.log(error)
         }
@@ -69,12 +80,21 @@ export default function Index() {
                     ))}
                 </View>
 
-                {/* valor */}
+                {/* input valor */}
                 <Text style={styles.calcText}>
                     Valor
                 </Text>
 
-                <TextInput keyboardType="number-pad" style={styles.calcInput} />
+                <View>
+                    <TextInput
+                        selectTextOnFocus
+                        onChangeText={checkNumber}
+                        keyboardType="number-pad"
+                        style={styles.calcInput}
+                        value={valueCalc}
+                    />
+                    <Text style={styles.calcInputSigla}>{coinA.sigla}</Text>
+                </View>
 
                 {/* para */}
                 <Text style={styles.calcText}>
@@ -97,6 +117,24 @@ export default function Index() {
                     ))}
                 </View>
 
+            </View>
+
+            {/* btn calc */}
+            <TouchableOpacity onPress={compare} style={styles.btnSubmit}>
+                <Text style={styles.btnSubmitText}>Calcular</Text>
+            </TouchableOpacity>
+
+            {/* Response */}
+            <View style={styles.resView}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch', gap: 10 }}>
+                    <Text style={styles.resTextSymbol}>{result.siglaA}</Text>
+                    <Text style={styles.resNumber}>{result.valueCalc}</Text>
+                </View>
+                <Text style={styles.resText}>Equivale</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch', gap: 10 }}>
+                    <Text style={styles.resTextSymbol}>{result.siglaB}</Text>
+                    <Text style={styles.resNumber}>{result.calc}</Text>
+                </View>
             </View>
         </ScrollArea >
     )
